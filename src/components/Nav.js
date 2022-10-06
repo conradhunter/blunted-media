@@ -1,45 +1,58 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/blunted-logo.png";
 
-const Nav = () => {
+const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageChange }) => {
+
+  useEffect(() => {
+    setDisplayedNavButtons();
+  });
+
+  function setDisplayedNavButtons() {
+    if (isAuth === true) { 
+      logInButton.current.style.display = 'none';
+      signOutButton.current.style.display = 'none';
+    } else {
+      signOutButton.current.style.display = 'none';
+    }
+  }
+
+
   return (
     <nav className="bg-blue-200 h-16 flex justify-between items-center px-16 border-b-2 border-black">
       <div className="flex items-center">
         <figure className="leading-none mr-8 cursor-pointer">
-          <a href="/">
+          <Link to="/">
             <img src={logo} alt="Blunted Logo" className="h-12" />
-          </a>
+          </Link>
         </figure>
         <ul className="flex justify-center">
           <li className="mx-4 font-semibold">
-            <a href="/">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li className="mx-4 font-semibold">
-            <a href="/feed">Feed</a>
+            <Link to="/feed">Feed</Link>
           </li>
           <li className="mx-4 font-semibold">
-            <a href="/blog">Blog</a>
+            <Link to="/blog">Blog</Link>
           </li>
           <li className="mx-4 font-semibold">
-            <a href="/stats">Stats</a>
+            <Link to="/events">Events</Link>
           </li>
           <li className="mx-4 font-semibold">
-            <a href="/store">Events</a>
-          </li>
-          <li className="mx-4 font-semibold">
-            <a href="/store">Store</a>
+            <Link to="/store">Store</Link>
           </li>
         </ul>
       </div>
 
       <div>
-        <button className="bg-white px-2 py-1 rounded-3xl mr-2 border-black font-medium text-md">
+        <button ref={logInButton} onClick={handleHomePageChange} className="bg-white px-2 py-1 rounded-3xl mr-2 border-black font-medium text-md">
           Log In
         </button>
-        <button className="bg-blue-400 text-black px-2 py-1 mr-2 rounded-3xl border-black font-medium text-md">
+        <button ref={signUpButton} onClick={handleHomePageChange} className="bg-blue-400 text-black px-2 py-1 mr-2 rounded-3xl border-black font-medium text-md">
           Sign Up
         </button>
-        <button className="bg-blue-400 text-black px-2 py-1 rounded-3xl border-black font-medium text-md">
+        <button ref={signOutButton} className="bg-blue-400 text-black px-2 py-1 rounded-3xl border-black font-medium text-md">
           Sign Out
         </button>
       </div>

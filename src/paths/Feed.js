@@ -3,14 +3,16 @@ import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { storage } from "../firebase/firebaseConfig";
 
-const Feed = () => {
+const Feed = ({ feedUploadButton, feedUploadInput }) => {
   const [fileUpload, setFileUpload] = useState(null);
   const [fileList, setFileList] = useState([]);
-  const [figureStyle, setFigureStyle] = useState(0);
 
   const heights = [225, 275, 325, 375, 425, 475];
   let randomHeight = heights[Math.floor(Math.random() * heights.length)];
 
+  // For each loop to append heights to figures
+
+  
 
   const fileListRef = ref(storage, "feed/");
 
@@ -56,6 +58,7 @@ const Feed = () => {
           </select>
 
           <input
+            ref={feedUploadInput}
             onChange={(event) => {
               setFileUpload(event.target.files[0]);
             }}
@@ -63,6 +66,7 @@ const Feed = () => {
           />
           <button
             onClick={uploadFile}
+            ref={feedUploadButton}
             className="bg-blue-300 py-2 hover:bg-blue-400 w-20 mb-10 rounded-full transition-all duration-200 border-2 border-black"
           >
             Upload
@@ -76,8 +80,7 @@ const Feed = () => {
                 id="feed-figure"
                 className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
               >
-
-                <img id="image" alt="" src={url} />
+                <img id="image" alt=""  src={url} />
               </div>
             );
           })}

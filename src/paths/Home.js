@@ -1,28 +1,6 @@
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import React, { useRef } from "react";
-import { auth } from "../firebase/firebaseConfig";
+import React from "react";
 
-const Home = ({isAuth, setIsAuth}) => {
-
-  const emailRef = useRef();
-  const passwordRef = useRef();
-
-  async function handleSignUp() {
-    await signUp(emailRef.current.value, passwordRef.current.value);
-    setIsAuth(true);
-  }
-
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
-  }
-
-  function signIn() {
-    signInWithEmailAndPassword(auth, emailRef, passwordRef);
-    setIsAuth(true);
-  }
+const Home = ({isAuth, signIn, handleSignUp, emailRef, passwordRef, modalForm}) => {
 
   if (isAuth === false) {
     return (
@@ -36,13 +14,13 @@ const Home = ({isAuth, setIsAuth}) => {
             id="home-aside"
             className="w-2/5 border-l-2 border-black flex items-center justify-center"
           >
-            <div className="flex flex-col">
+            <form className="flex flex-col">
                 <div className="mb-2 flex justify-end">
                   <input
                     placeholder="Email Address"
                     ref={emailRef}
                     type="email"
-                    className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-400"
+                    className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
                   />
                 </div>
                 <div className="mb-2 flex justify-end">
@@ -50,7 +28,7 @@ const Home = ({isAuth, setIsAuth}) => {
                     placeholder="Password"
                     ref={passwordRef}
                     type="password"
-                    className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-400"
+                    className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
                   />
                 </div>
                 <button
@@ -59,10 +37,10 @@ const Home = ({isAuth, setIsAuth}) => {
                 >
                   Join
                 </button>
-            </div>
+            </form>
           </aside>
         </main>
-        <div className="bg-blue-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/2 border-4 border-black rounded-xl hidden flex-col items-center justify-center">
+        <form ref={modalForm} className="bg-blue-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/2 border-4 border-black rounded-xl hidden flex-col items-center justify-center">
           <input
             type="email"
             placeholder="Email Address"
@@ -79,7 +57,7 @@ const Home = ({isAuth, setIsAuth}) => {
           >
             Log In
           </button>
-        </div>
+        </form>
       </>
     );
   } else {
