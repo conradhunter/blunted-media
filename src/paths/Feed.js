@@ -76,11 +76,11 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
           {fileList.map((url) => {
             return (
               <div
-                key={url}
+                key={fileList.url}
                 id="feed-figure"
                 className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
               >
-                <img id="image" alt=""  src={url} />
+                <img id="image" alt="" src={url} />
               </div>
             );
           })}

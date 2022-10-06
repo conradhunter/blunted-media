@@ -40,7 +40,7 @@ const Home = ({isAuth, signIn, handleSignUp, emailRef, passwordRef, modalForm}) 
             </form>
           </aside>
         </main>
-        <form ref={modalForm} className="bg-blue-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/2 border-4 border-black rounded-xl hidden flex-col items-center justify-center">
+        <form id="modal-form" ref={modalForm} className="bg-blue-200 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/2 border-2 border-black rounded-lg overflow-hidden flex flex-col items-center justify-center">
           <input
             type="email"
             placeholder="Email Address"

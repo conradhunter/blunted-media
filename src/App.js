@@ -1,6 +1,11 @@
 import "./App.css";
 import Nav from "./components/Nav";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./paths/Home";
 import Blog from "./paths/Blog";
 import Footer from "./components/Footer";
@@ -63,56 +68,64 @@ function App() {
     }
   }
 
+  let navigate = useNavigate();
+
+  const handleLogInButtonClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      modalForm.current.style.display = "block";
+    }, 500)
+  };
+
   return (
     <div className="App">
-      <Router>
-        <Nav
-          isAuth={isAuth}
-          signUpButton={signUpButton}
-          logInButton={logInButton}
-          signOutButton={signOutButton}
-          handleHomePageChange={handleHomePageChange}
+      <Nav
+        isAuth={isAuth}
+        signUpButton={signUpButton}
+        logInButton={logInButton}
+        signOutButton={signOutButton}
+        handleHomePageChange={handleHomePageChange}
+        handleLogInButtonClick={handleLogInButtonClick}
+      />
+
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              isAuth={isAuth}
+              signIn={signIn}
+              handleSignUp={handleSignUp}
+              emailRef={emailRef}
+              passwordRef={passwordRef}
+              modalForm={modalForm}
+            />
+          }
         />
+        <Route
+          path="/feed"
+          element={
+            <Feed
+              feedUploadButton={feedUploadButton}
+              feedUploadInput={feedUploadInput}
+            />
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <Blog
+              isAuth={isAuth}
+              blogUploadButton={blogUploadButton}
+              handleDisplayUserAuthFeatures={handleDisplayUserAuthFeatures}
+            />
+          }
+        />
+        <Route path="/store" element={<Store />} />
+      </Routes>
 
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Home
-                isAuth={isAuth}
-                signIn={signIn}
-                handleSignUp={handleSignUp}
-                emailRef={emailRef}
-                passwordRef={passwordRef}
-                modalForm={modalForm}
-              />
-            }
-          />
-          <Route
-            path="/feed"
-            element={
-              <Feed
-                feedUploadButton={feedUploadButton}
-                feedUploadInput={feedUploadInput}
-              />
-            }
-          />
-          <Route
-            path="/blog"
-            element={
-              <Blog
-                isAuth={isAuth}
-                blogUploadButton={blogUploadButton}
-                handleDisplayUserAuthFeatures={handleDisplayUserAuthFeatures}
-              />
-            }
-          />
-          <Route path="/store" element={<Store />} />
-        </Routes>
-
-        <Footer />
-      </Router>
+      <Footer />
     </div>
   );
 }

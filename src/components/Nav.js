@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/blunted-logo.png";
 
-const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageChange }) => {
+const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageChange, handleLogInButtonClick }) => {
 
   useEffect(() => {
     setDisplayedNavButtons();
@@ -46,7 +46,7 @@ const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageC
       </div>
 
       <div>
-        <button ref={logInButton} onClick={handleHomePageChange} className="bg-white px-2 py-1 rounded-3xl mr-2 border-black font-medium text-md">
+        <button ref={logInButton} onClick={handleLogInButtonClick} className="bg-white px-2 py-1 rounded-3xl mr-2 border-black font-medium text-md">
           Log In
         </button>
         <button ref={signUpButton} onClick={handleHomePageChange} className="bg-blue-400 text-black px-2 py-1 mr-2 rounded-3xl border-black font-medium text-md">
