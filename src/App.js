@@ -1,7 +1,6 @@
 import "./App.css";
 import Nav from "./components/Nav";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
@@ -51,9 +50,8 @@ function App() {
     setIsAuth(true);
   }
 
-  function handleHomePageChange() {
-    window.location = "/";
-    // change to useNavigate later on
+  const handleHomePageChange = () => {
+    navigate('/');
   }
 
   const blogUploadButton = useRef();
@@ -68,14 +66,22 @@ function App() {
     }
   }
 
+  // Display Log-In modal if user clicks Log-In button in Navigation Bar
   let navigate = useNavigate();
-
   const handleLogInButtonClick = () => {
     navigate("/");
     setTimeout(() => {
       modalForm.current.style.display = "block";
-    }, 500)
+      isModalOpen();
+    }, 300)
   };
+
+  const homeContent = useRef();
+  function isModalOpen() {
+    if (modalForm.current.style.display == 'block') {
+      homeContent.current.style.filter = 'blur(5px)';
+    }
+  }
 
   return (
     <div className="App">
@@ -94,12 +100,12 @@ function App() {
           path="/"
           element={
             <Home
-              isAuth={isAuth}
               signIn={signIn}
               handleSignUp={handleSignUp}
               emailRef={emailRef}
               passwordRef={passwordRef}
               modalForm={modalForm}
+              homeContent={homeContent}
             />
           }
         />
