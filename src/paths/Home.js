@@ -6,9 +6,11 @@ const Home = ({
   emailRef,
   passwordRef,
   modalForm,
-  homeContent
+  homeContent,
+  isAuth
 }) => {
 
+  if (isAuth === false) {
     return (
       <>
         <main ref={homeContent} id="home-main" className="flex">
@@ -56,17 +58,17 @@ const Home = ({
             <input
               type="email"
               placeholder="Email Address"
-              className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500 mb-3"
+              className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-black mb-3"
             />
             <input
               type="password"
               placeholder="Password"
               autoComplete='password'
-              className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500 mb-3"
+              className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-black mb-3"
             />
             <button
               onClick={signIn}
-              className="bg-blue-100 px-2 py-1 w-36 rounded-3xl mr-2 border-black border-2 font-medium text-md"
+              className="bg-blue-400 px-2 py-1 w-36 rounded-3xl mr-2 border-black border-2 font-medium text-md hover:bg-blue-500 transition-all duration-200"
             >
               Log In
             </button>
@@ -74,6 +76,16 @@ const Home = ({
         </form>
       </>
     );
+  } else {
+    return (
+      <>
+        <main className="row py-16">
+          <h1 className="text-center text-4xl font-semibold text-blue-500 mb-10">Browse some recently shared content!</h1>
+        </main>
+      </>
+    );
+  }
 };
+
 
 export default Home;

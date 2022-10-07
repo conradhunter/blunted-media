@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/blunted-logo.png";
 
 const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageChange, handleLogInButtonClick }) => {
@@ -11,12 +11,14 @@ const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageC
   function setDisplayedNavButtons() {
     if (isAuth === true) { 
       logInButton.current.style.display = 'none';
-      signOutButton.current.style.display = 'none';
+      signOutButton.current.style.display = 'block';
+      signUpButton.current.style.display = 'none';
     } else {
+      logInButton.current.style.display = 'block';
       signOutButton.current.style.display = 'none';
+      signUpButton.current.style.display = 'block';
     }
   }
-
 
   return (
     <nav className="bg-blue-200 h-16 flex justify-between items-center px-16 border-b-2 border-black">
@@ -45,7 +47,7 @@ const Nav = ({ isAuth, logInButton, signOutButton, signUpButton, handleHomePageC
         </ul>
       </div>
 
-      <div>
+      <div className="flex flex-row">
         <button ref={logInButton} onClick={handleLogInButtonClick} className="bg-white px-2 py-1 rounded-3xl mr-2 border-black font-medium text-md">
           Log In
         </button>

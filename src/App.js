@@ -1,10 +1,6 @@
 import "./App.css";
 import Nav from "./components/Nav";
-import {
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./paths/Home";
 import Blog from "./paths/Blog";
 import Footer from "./components/Footer";
@@ -16,16 +12,16 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
+import Events from "./paths/Events";
 
 function App() {
-  const [isAuth, setIsAuth] = useState([]);
-  const modalForm = useRef();
+  const [isAuth, setIsAuth] = useState(null);
 
   // initial page load to set 'isAuth' to false
   useEffect(() => {
     setIsAuth(false);
     localStorage.setItem("isAuth", false);
-  }, []);
+  });
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -51,15 +47,15 @@ function App() {
   }
 
   const handleHomePageChange = () => {
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const blogUploadButton = useRef();
   const feedUploadButton = useRef();
   const feedUploadInput = useRef();
 
   function handleDisplayUserAuthFeatures() {
-    if (isAuth == false) {
+    if (isAuth === false) {
       blogUploadButton.current.style.display = "none";
       // feedUploadButton.current.style.display = "none";
       // feedUploadInput.current.style.display = "none";
@@ -67,21 +63,25 @@ function App() {
   }
 
   // Display Log-In modal if user clicks Log-In button in Navigation Bar
+  const modalForm = useRef();
+
   let navigate = useNavigate();
   const handleLogInButtonClick = () => {
     navigate("/");
     setTimeout(() => {
       modalForm.current.style.display = "block";
       isModalOpen();
-    }, 300)
+    }, 300);
   };
 
   const homeContent = useRef();
+
   function isModalOpen() {
-    if (modalForm.current.style.display == 'block') {
-      homeContent.current.style.filter = 'blur(5px)';
+    if (modalForm.current.style.display === "block") {
+      homeContent.current.style.filter = "blur(5px)";
     }
   }
+
 
   return (
     <div className="App">
@@ -106,6 +106,7 @@ function App() {
               passwordRef={passwordRef}
               modalForm={modalForm}
               homeContent={homeContent}
+              isAuth={isAuth}
             />
           }
         />
@@ -128,6 +129,7 @@ function App() {
             />
           }
         />
+        <Route path="/events" element={<Events />} />
         <Route path="/store" element={<Store />} />
       </Routes>
 

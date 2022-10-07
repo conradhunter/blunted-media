@@ -8,10 +8,10 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
   const [fileList, setFileList] = useState([]);
 
   const heights = [225, 275, 325, 375, 425, 475];
-  let randomHeight = heights[Math.floor(Math.random() * heights.length)];
+  const randomHeight = heights[Math.floor(Math.random() * heights.length)];
+  console.log(randomHeight);
 
   // For each loop to append heights to figures
-
   
 
   const fileListRef = ref(storage, "feed/");
