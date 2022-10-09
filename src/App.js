@@ -20,13 +20,12 @@ function App() {
   // initial page load to set 'isAuth' to false
   useEffect(() => {
     setIsAuth(false);
-    localStorage.setItem("isAuth", false);
-  });
+  }, []);
 
   const emailRef = useRef();
   const passwordRef = useRef();
 
-  // Nav auth button functions
+  // Authentication logic
   const logInButton = useRef();
   const signOutButton = useRef();
   const signUpButton = useRef();
@@ -34,7 +33,7 @@ function App() {
   async function handleSignUp() {
     await signUp(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
-    localStorage.setItem("isAuth", true);
+    navigate("/");
   }
 
   function signUp(email, password) {

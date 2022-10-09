@@ -7,9 +7,8 @@ const Home = ({
   passwordRef,
   modalForm,
   homeContent,
-  isAuth
+  isAuth,
 }) => {
-
   if (isAuth === false) {
     return (
       <>
@@ -23,23 +22,19 @@ const Home = ({
             className="w-2/5 border-l-2 border-black flex items-center justify-center"
           >
             <form className="flex flex-col">
-              <div className="mb-2 flex justify-end">
                 <input
                   placeholder="Email Address"
                   ref={emailRef}
                   type="email"
-                  className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
+                  className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
                 />
-              </div>
-              <div className="mb-2 flex justify-end">
                 <input
                   placeholder="Password"
                   ref={passwordRef}
-                  autoComplete='password'
+                  autoComplete="password"
                   type="password"
-                  className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
+                  className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
                 />
-              </div>
               <button
                 onClick={handleSignUp}
                 className="bg-blue-300 py-2 hover:bg-blue-400 w-36 mx-auto transition-all duration-200 border-2 border-black"
@@ -49,6 +44,8 @@ const Home = ({
             </form>
           </aside>
         </main>
+
+
         <form
           id="modal-form"
           ref={modalForm}
@@ -63,7 +60,7 @@ const Home = ({
             <input
               type="password"
               placeholder="Password"
-              autoComplete='password'
+              autoComplete="password"
               className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-black mb-3"
             />
             <button
@@ -80,12 +77,13 @@ const Home = ({
     return (
       <>
         <main className="row py-16">
-          <h1 className="text-center text-4xl font-semibold text-blue-500 mb-10">Browse some recently shared content!</h1>
+          <h1 className="text-center text-4xl font-semibold text-blue-500 mb-10">
+            Browse some recently shared content!
+          </h1>
         </main>
       </>
     );
   }
 };
-
 
 export default Home;
