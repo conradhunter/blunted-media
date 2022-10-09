@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import Events from "./paths/Events";
@@ -30,11 +30,10 @@ function App() {
   const logInButton = useRef();
   const signOutButton = useRef();
   const signUpButton = useRef();
-  
+
   async function handleSignUp() {
     await signUp(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
-    navigate("/");
   }
 
   function signUp(email, password) {
@@ -54,6 +53,8 @@ function App() {
   async function handleSignOut() {
     await signUserOut(auth);
     setIsAuth(false);
+    navigate('/');
+    window.location.reload();
   }
 
   function signUserOut() {
@@ -96,7 +97,6 @@ function App() {
     }
   }
 
-
   return (
     <div className="App">
       <Nav
@@ -115,7 +115,7 @@ function App() {
           path="/"
           element={
             <Home
-            handleSignIn={handleSignIn}
+              handleSignIn={handleSignIn}
               handleSignUp={handleSignUp}
               emailRef={emailRef}
               passwordRef={passwordRef}

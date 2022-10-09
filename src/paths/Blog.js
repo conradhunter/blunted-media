@@ -4,6 +4,7 @@ import Post from "../components/Post";
 import { db } from "../firebase/firebaseConfig";
 
 const Blog = ({ blogUploadButton, handleDisplayUserAuthFeatures }) => {
+  
   const [postLists, setPostList] = useState([]);
 
   useEffect(() => {
@@ -28,7 +29,6 @@ const Blog = ({ blogUploadButton, handleDisplayUserAuthFeatures }) => {
     getPosts();
     handleDisplayUserAuthFeatures();
   }, []);
-
 
   return (
     <>

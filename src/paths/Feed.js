@@ -9,10 +9,8 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
 
   const heights = [225, 275, 325, 375, 425, 475];
   const randomHeight = heights[Math.floor(Math.random() * heights.length)];
-  console.log(randomHeight);
 
   // For each loop to append heights to figures
-  
 
   const fileListRef = ref(storage, "feed/");
 
@@ -26,6 +24,7 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
     });
   };
 
+  // Fetch all files from Firebase Storage
   useEffect(() => {
     listAll(fileListRef).then((response) => {
       response.items.forEach((item) => {
@@ -36,6 +35,8 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
     });
   }, []);
 
+  // placeholder url
+  // https://via.placeholder.com/225
 
   return (
     <>
@@ -75,13 +76,13 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
         <div className="flex justify-between flex-wrap">
           {fileList.map((url) => {
             return (
-              <div
-                key={fileList.url}
-                id="feed-figure"
-                className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
-              >
-                <img id="image" alt="" src={url} />
-              </div>
+                <img
+                  key={fileList.url + v4()}
+                  className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
+                  id="feed-figure"
+                  alt=""
+                  src={url}
+                />
             );
           })}
         </div>
