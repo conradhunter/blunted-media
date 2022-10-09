@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import Events from "./paths/Events";
@@ -29,7 +30,7 @@ function App() {
   const logInButton = useRef();
   const signOutButton = useRef();
   const signUpButton = useRef();
-
+  
   async function handleSignUp() {
     await signUp(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
@@ -40,9 +41,23 @@ function App() {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  function signIn() {
-    signInWithEmailAndPassword(auth, emailRef, passwordRef);
+  async function handleSignIn() {
+    signIn(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
+    homeContent.current.style.filter = "blur(0px)";
+  }
+
+  function signIn() {
+    return signInWithEmailAndPassword(auth, emailRef, passwordRef);
+  }
+
+  async function handleSignOut() {
+    await signUserOut(auth);
+    setIsAuth(false);
+  }
+
+  function signUserOut() {
+    return signOut(auth);
   }
 
   const handleHomePageChange = () => {
@@ -91,6 +106,7 @@ function App() {
         signOutButton={signOutButton}
         handleHomePageChange={handleHomePageChange}
         handleLogInButtonClick={handleLogInButtonClick}
+        handleSignOut={handleSignOut}
       />
 
       <Routes>
@@ -99,7 +115,7 @@ function App() {
           path="/"
           element={
             <Home
-              signIn={signIn}
+            handleSignIn={handleSignIn}
               handleSignUp={handleSignUp}
               emailRef={emailRef}
               passwordRef={passwordRef}

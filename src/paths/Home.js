@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = ({
-  signIn,
+  handleSignIn,
   handleSignUp,
   emailRef,
   passwordRef,
@@ -54,17 +54,19 @@ const Home = ({
           <div id="modalForm__inner--wrapper">
             <input
               type="email"
+              ref={emailRef}
               placeholder="Email Address"
               className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-black mb-3"
             />
             <input
               type="password"
+              ref={passwordRef}
               placeholder="Password"
               autoComplete="password"
               className="bg-gray-200 w-72 py-1 px-2 rounded outline-none border-2 border-black mb-3"
             />
             <button
-              onClick={signIn}
+              onClick={handleSignIn}
               className="bg-blue-400 px-2 py-1 w-36 rounded-3xl mr-2 border-black border-2 font-medium text-md hover:bg-blue-500 transition-all duration-200"
             >
               Log In
