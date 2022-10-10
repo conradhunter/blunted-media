@@ -17,6 +17,8 @@ import Events from "./paths/Events";
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // initial page load to set 'isAuth' to false
   useEffect(() => {
@@ -32,18 +34,15 @@ function App() {
   const signUpButton = useRef();
 
   async function handleSignUp() {
-    await signUp(emailRef.current.value, passwordRef.current.value);
+    await createUserWithEmailAndPassword(auth, email, password);
     setIsAuth(true);
-  }
-
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
   }
 
   async function handleSignIn() {
     signIn(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
     homeContent.current.style.filter = "blur(0px)";
+    localStorage.setItem('isAuth', true);
   }
 
   function signIn() {
@@ -54,7 +53,7 @@ function App() {
     await signUserOut(auth);
     setIsAuth(false);
     navigate('/');
-    window.location.reload();
+    localStorage.setItem('isAuth', false);
   }
 
   function signUserOut() {
@@ -79,8 +78,8 @@ function App() {
 
   // Display Log-In modal if user clicks Log-In button in Navigation Bar
   const modalForm = useRef();
-
   let navigate = useNavigate();
+
   const handleLogInButtonClick = () => {
     navigate("/");
     setTimeout(() => {
@@ -122,6 +121,8 @@ function App() {
               modalForm={modalForm}
               homeContent={homeContent}
               isAuth={isAuth}
+              setEmail={setEmail}
+              setPassword={setPassword}
             />
           }
         />
