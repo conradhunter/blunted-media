@@ -8,8 +8,6 @@ const Home = ({
   modalForm,
   homeContent,
   isAuth,
-  setEmail,
-  setPassword
 }) => {
   if (isAuth === false) {
     return (
@@ -26,18 +24,13 @@ const Home = ({
             <form className="flex flex-col">
                 <input
                   placeholder="Email Address"
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                  }}
+                  ref={emailRef}
                   type="email"
                   className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
                 />
                 <input
                   placeholder="Password"
                   ref={passwordRef}
-                  onChange={(e) => {
-                    setPassword(e.target.value)
-                  }}
                   autoComplete="password"
                   type="password"
                   className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"

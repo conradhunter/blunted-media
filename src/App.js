@@ -17,8 +17,6 @@ import Events from "./paths/Events";
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   // initial page load to set 'isAuth' to false
   useEffect(() => {
@@ -34,8 +32,13 @@ function App() {
   const signUpButton = useRef();
 
   async function handleSignUp() {
-    await createUserWithEmailAndPassword(auth, email, password);
+    signUp(auth, emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
+    localStorage.setItem('isAuth', true);
+  }
+
+  function signUp() {
+    return createUserWithEmailAndPassword(auth, emailRef, passwordRef);
   }
 
   async function handleSignIn() {
@@ -121,8 +124,6 @@ function App() {
               modalForm={modalForm}
               homeContent={homeContent}
               isAuth={isAuth}
-              setEmail={setEmail}
-              setPassword={setPassword}
             />
           }
         />
