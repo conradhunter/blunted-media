@@ -154,7 +154,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/store" element={<Store />} />
 
-        <Route exact path="/post/:id" element={<Post postLists={postLists}/>} />
+        <Route exact path="/:id" element={<Post postLists={postLists} />} />
         
       </Routes>
 

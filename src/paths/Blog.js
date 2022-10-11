@@ -60,7 +60,7 @@ const Blog = ({
               <p className="text-base mb-4">
                 {post.data.text.slice(0, 200) + " ..."}
               </p>
-              <Link to={`/post/${post.id}`}>
+              <Link to={`/${post.id}`}>
                 <button className="bg-blue-300 py-1 hover:bg-blue-400 w-24 rounded-full transition-all duration-200 border-2 border-black">
                   View Post
                 </button>
