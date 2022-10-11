@@ -22,21 +22,22 @@ const Home = ({
             className="w-2/5 border-l-2 border-black flex items-center justify-center"
           >
             <form className="flex flex-col">
-                <input
-                  placeholder="Email Address"
-                  ref={emailRef}
-                  type="email"
-                  className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
-                />
-                <input
-                  placeholder="Password"
-                  ref={passwordRef}
-                  autoComplete="password"
-                  type="password"
-                  className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
-                />
+              <input
+                placeholder="Email Address"
+                ref={emailRef}
+                type="email"
+                className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
+              />
+              <input
+                placeholder="Password"
+                ref={passwordRef}
+                autoComplete="password"
+                type="password"
+                className="bg-gray-200 mb-2 w-72 py-1 px-2 rounded outline-none border-2 border-gray-500"
+              />
               <button
                 onClick={handleSignUp}
+                type="button"
                 className="bg-blue-300 py-2 hover:bg-blue-400 w-36 mx-auto transition-all duration-200 border-2 border-black"
               >
                 Join
@@ -44,7 +45,6 @@ const Home = ({
             </form>
           </aside>
         </main>
-
 
         <form
           id="modal-form"
@@ -67,6 +67,7 @@ const Home = ({
             />
             <button
               onClick={handleSignIn}
+              type="submit"
               className="bg-blue-400 px-2 py-1 w-36 rounded-3xl mr-2 border-black border-2 font-medium text-md hover:bg-blue-500 transition-all duration-200"
             >
               Log In

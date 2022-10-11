@@ -14,6 +14,7 @@ import {
 } from "firebase/auth";
 import { auth } from "./firebase/firebaseConfig";
 import Events from "./paths/Events";
+import Post from "./components/Post";
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
@@ -31,10 +32,10 @@ function App() {
   const signOutButton = useRef();
   const signUpButton = useRef();
 
-  async function handleSignUp() {
+  function handleSignUp() {
     signUp(auth, emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
-    localStorage.setItem('isAuth', true);
+    localStorage.setItem("isAuth", true);
   }
 
   function signUp() {
@@ -45,7 +46,7 @@ function App() {
     signIn(emailRef.current.value, passwordRef.current.value);
     setIsAuth(true);
     homeContent.current.style.filter = "blur(0px)";
-    localStorage.setItem('isAuth', true);
+    localStorage.setItem("isAuth", true);
   }
 
   function signIn() {
@@ -55,8 +56,8 @@ function App() {
   async function handleSignOut() {
     await signUserOut(auth);
     setIsAuth(false);
-    navigate('/');
-    localStorage.setItem('isAuth', false);
+    navigate("/");
+    localStorage.setItem("isAuth", false);
   }
 
   function signUserOut() {
@@ -98,6 +99,8 @@ function App() {
       homeContent.current.style.filter = "blur(5px)";
     }
   }
+
+  const [postLists, setPostList] = useState([]);
 
   return (
     <div className="App">
@@ -143,11 +146,16 @@ function App() {
               isAuth={isAuth}
               blogUploadButton={blogUploadButton}
               handleDisplayUserAuthFeatures={handleDisplayUserAuthFeatures}
+              postLists={postLists}
+              setPostList={setPostList}
             />
           }
         />
         <Route path="/events" element={<Events />} />
         <Route path="/store" element={<Store />} />
+
+        <Route exact path="/post/:id" element={<Post postLists={postLists}/>} />
+        
       </Routes>
 
       <Footer />
