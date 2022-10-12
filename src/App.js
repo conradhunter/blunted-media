@@ -15,13 +15,14 @@ import {
 import { auth } from "./firebase/firebaseConfig";
 import Events from "./paths/Events";
 import Post from "./components/Post";
+import UploadBlog from "./paths/UploadBlog";
 
 function App() {
   const [isAuth, setIsAuth] = useState(null);
 
   // initial page load to set 'isAuth' to false
   useEffect(() => {
-    setIsAuth(false);
+    setIsAuth(true);
   }, []);
 
   const emailRef = useRef();
@@ -154,7 +155,9 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/store" element={<Store />} />
 
-        <Route exact path="/:id" element={<Post postLists={postLists} />} />
+        <Route exact path="/post/:id" element={<Post postLists={postLists} />} />
+
+        <Route path='/upload-blog-post' element={<UploadBlog />} />
         
       </Routes>
 

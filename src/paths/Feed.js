@@ -1,5 +1,5 @@
 import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { v4 } from "uuid";
 import { storage } from "../firebase/firebaseConfig";
 
@@ -10,7 +10,11 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
   const heights = [225, 275, 325, 375, 425, 475];
   const randomHeight = heights[Math.floor(Math.random() * heights.length)];
 
-  // For each loop to append heights to figures
+  const imagesRef = useRef();
+
+  for (let i = 0; i <= fileList.length; i++) {
+
+  }
 
   const fileListRef = ref(storage, "feed/");
 
@@ -64,6 +68,7 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
               setFileUpload(event.target.files[0]);
             }}
             type="file"
+            accept="image/*"
           />
           <button
             onClick={uploadFile}
@@ -80,6 +85,7 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
                   key={fileList.url + v4()}
                   className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
                   id="feed-figure"
+                  ref={imagesRef}
                   alt=""
                   src={url}
                 />

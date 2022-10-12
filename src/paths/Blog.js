@@ -9,7 +9,6 @@ const Blog = ({
   postLists,
   setPostList,
 }) => {
-  
   useEffect(() => {
     const getPosts = async () => {
       const querySnapshot = await getDocs(collection(db, "posts"));
@@ -40,15 +39,16 @@ const Blog = ({
           <h1 className="text-center text-4xl font-semibold text-blue-500 mb-10">
             Featured Blog Posts
           </h1>
-          <button
-            ref={blogUploadButton}
-            className="bg-blue-300 py-2 hover:bg-blue-400 w-20 mb-10 rounded-full transition-all duration-200 border-2 border-black absolute right-48"
-          >
-            Upload
-          </button>
+          <Link to="/upload-blog-post">
+            <button
+              ref={blogUploadButton}
+              className="bg-blue-300 py-2 hover:bg-blue-400 w-20 mb-10 rounded-full transition-all duration-200 border-2 border-black absolute right-48"
+            >
+              Upload
+            </button>
+          </Link>
         </header>
-
-        {postLists.map((post, i) => {
+        {postLists.reverse().map((post, i) => {
           return (
             <div
               key={i}
@@ -57,10 +57,11 @@ const Blog = ({
               <h1 className="text-3xl mb-4 text-blue-500 font-medium">
                 {post.data.title}
               </h1>
+              <p className="text-lg mb-4 text-blue-500 font-medium">Category: {post.data.category}</p>
               <p className="text-base mb-4">
                 {post.data.text.slice(0, 200) + " ..."}
               </p>
-              <Link to={`/${post.id}`}>
+              <Link to={`/post/${post.id}`}>
                 <button className="bg-blue-300 py-1 hover:bg-blue-400 w-24 rounded-full transition-all duration-200 border-2 border-black">
                   View Post
                 </button>
@@ -68,7 +69,6 @@ const Blog = ({
             </div>
           );
         })}
-        ;
       </main>
     </>
   );
