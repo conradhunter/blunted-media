@@ -57,9 +57,12 @@ const Blog = ({
               <h1 className="text-3xl mb-4 text-blue-500 font-medium">
                 {post.data.title}
               </h1>
-              <p className="text-lg mb-4 text-blue-500 font-medium">Category: {post.data.category}</p>
+              <p className="text-lg mb-4 text-blue-500 font-medium">{post.data.category}</p>
               <p className="text-base mb-4">
                 {post.data.text.slice(0, 200) + " ..."}
+              </p>
+              <p className="text-base mb-4 italic font-medium">
+                Written by: {post.data.author}
               </p>
               <Link to={`/post/${post.id}`}>
                 <button className="bg-blue-300 py-1 hover:bg-blue-400 w-24 rounded-full transition-all duration-200 border-2 border-black">

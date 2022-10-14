@@ -30,24 +30,6 @@ const Store = () => {
           >
             <img src={skis} alt="" />
           </figure>
-          <figure
-            id="product-figure"
-            className="text-white flex border-2 border-gray-600"
-          >
-            <img src={skis} alt="" />
-          </figure>
-          <figure
-            id="product-figure"
-            className="text-white flex border-2 border-gray-600"
-          >
-            <img src={skis} alt="" />
-          </figure>
-          <figure
-            id="product-figure"
-            className="text-white flex border-2 border-gray-600"
-          >
-            <img src={skis} alt="" />
-          </figure>
         </div>
       </main>
     </>

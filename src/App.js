@@ -22,7 +22,7 @@ function App() {
 
   // initial page load to set 'isAuth' to false
   useEffect(() => {
-    setIsAuth(true);
+    setIsAuth(false);
   }, []);
 
   const emailRef = useRef();

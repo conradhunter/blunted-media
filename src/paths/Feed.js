@@ -28,6 +28,8 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
     });
   };
 
+  console.log(fileList);
+
   // Fetch all files from Firebase Storage
   useEffect(() => {
     listAll(fileListRef).then((response) => {
@@ -83,7 +85,7 @@ const Feed = ({ feedUploadButton, feedUploadInput }) => {
             return (
                 <img
                   key={fileList.url + v4()}
-                  className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-200 images"
+                  className="mb-6 text-white overflow-hidden flex items-center justify-center relative rounded-lg bg-gray-300 images"
                   id="feed-figure"
                   ref={imagesRef}
                   alt=""

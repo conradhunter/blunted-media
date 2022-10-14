@@ -9,6 +9,7 @@ const Home = ({
   homeContent,
   isAuth,
 }) => {
+
   if (isAuth === false) {
     return (
       <>
